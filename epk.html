@@ -147,6 +147,29 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
   .contact-section{padding:60px 1.5rem;}
   .epk-footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem 3rem;}
 }
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:110;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--paper);transition:all .3s ease;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:105;
+  background:rgba(12,12,12,.98);backdrop-filter:blur(12px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,4rem);
+  letter-spacing:.15em;color:var(--paper);text-decoration:none;transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--gold2);}
+.mobile-menu-rule{width:60px;height:1px;background:rgba(184,147,42,.3);}
+@media(max-width:768px){
+  .epk-nav .epk-badge{display:none;}
+  .hamburger{display:flex;}
+}
 </style>
 </head>
 <body>
@@ -172,6 +195,7 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
   <nav class="epk-nav">
     <a href="/" class="epk-nav-mark">Lord Saliba</a>
     <span class="epk-badge">EPK — Confidential</span>
+    <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
   <!-- HERO -->
@@ -306,7 +330,31 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
 
 </div>
 
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/" onclick="closeMenu()">Home</a>
+  <div class="mobile-menu-rule"></div>
+  <a href="#" onclick="closeMenu()">Bio</a>
+  <div class="mobile-menu-rule"></div>
+  <a href="#" onclick="closeMenu()">Music</a>
+  <div class="mobile-menu-rule"></div>
+  <a href="#" onclick="closeMenu()">Contact</a>
+</div>
+
 <script>
+
+function toggleMenu(){
+  document.getElementById('ham').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobile-menu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu(){
+  document.getElementById('ham').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 function unlock(){
   const val = document.getElementById('pw-input').value.trim();
   const err = document.getElementById('pw-error');
