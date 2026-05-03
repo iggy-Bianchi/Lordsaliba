@@ -42,33 +42,34 @@ nav.scrolled{background:rgba(12,12,12,.94);backdrop-filter:blur(8px);}
 
 /* ── HERO (dark) ── */
 .hero{
-  min-height:100vh;display:grid;place-items:center;
-  padding:clamp(90px,10vw,130px) 3.5rem clamp(40px,5vw,70px);
-  background:var(--ink);position:relative;overflow:hidden;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(90px,10vw,120px) 3.5rem clamp(60px,8vw,100px);
+  background:radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184,147,42,.13) 0%, var(--ink) 70%);
+  position:relative;overflow:hidden;
 }
-.hero-inner{width:100%;max-width:1300px;}
-.rule{width:100%;height:1px;background:rgba(242,237,230,.12);}
-.hero-eyebrow{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;}
-.hero-eyebrow span{font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--dim-light);}
-.hero-name{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(5.5rem,19vw,19rem);
-  line-height:.88;letter-spacing:-.01em;display:block;
-  padding:.15em 0 .08em;
-  background:linear-gradient(to bottom,var(--paper) 52%,var(--gold) 52%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+.hero-logo-img{
+  width:clamp(220px,30vw,420px);
+  opacity:1;
+  filter:drop-shadow(0 12px 60px rgba(184,147,42,.3));
+  margin-bottom:2.5rem;
 }
-.hero-sub{display:flex;align-items:flex-end;justify-content:space-between;padding:.85rem 0;}
-.hero-role{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(.95rem,2.2vw,1.5rem);color:var(--gold2);letter-spacing:.05em;}
-.hero-links{display:flex;gap:1.75rem;}
-.hero-links a{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim-light);text-decoration:none;transition:color .2s;}
+.hero-role{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:clamp(1rem,2vw,1.4rem);color:var(--gold2);
+  letter-spacing:.1em;margin-bottom:2rem;text-align:center;
+}
+.rule{width:min(500px,80vw);height:1px;background:rgba(242,237,230,.15);margin:.75rem 0;}
+.hero-links{display:flex;gap:2.5rem;margin-top:1.5rem;}
+.hero-links a{
+  font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--dim-light);text-decoration:none;transition:color .2s;
+}
 .hero-links a:hover{color:var(--paper);}
-.hero-logo-wrap{margin-top:2rem;display:flex;justify-content:flex-end;}
-.hero-logo-wrap img{width:clamp(70px,8vw,110px);opacity:.85;filter:drop-shadow(0 4px 20px rgba(184,147,42,.2));}
 
 /* ── ABOUT (dark) ── */
 .about-section{
-  background:var(--ink);padding:clamp(80px,11vw,150px) 3.5rem;
+  background:radial-gradient(ellipse 60% 80% at 0% 50%, rgba(184,147,42,.07) 0%, var(--ink) 60%);
+  padding:clamp(80px,11vw,150px) 3.5rem;
 }
 .about-inner{max-width:1300px;margin:0 auto;}
 .ch-dark{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
@@ -92,7 +93,7 @@ nav.scrolled{background:rgba(12,12,12,.94);backdrop-filter:blur(8px);}
 .track-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;}
 
 /* ── SHOWS (dark) ── */
-.shows-section{background:var(--ink);padding:clamp(80px,11vw,150px) 3.5rem;}
+.shows-section{background:radial-gradient(ellipse 70% 60% at 100% 50%, rgba(184,147,42,.08) 0%, var(--ink) 65%);padding:clamp(80px,11vw,150px) 3.5rem;}
 .shows-inner{max-width:1300px;margin:0 auto;}
 .shows-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.9;color:var(--paper);margin-bottom:3rem;}
 .shows-list{}
@@ -123,7 +124,7 @@ nav.scrolled{background:rgba(12,12,12,.94);backdrop-filter:blur(8px);}
 .connect-tile:hover .ct-arrow{color:var(--gold2);letter-spacing:.38em;}
 
 /* ── BOOKING (dark) ── */
-.booking-section{background:var(--ink);padding:clamp(80px,11vw,150px) 3.5rem;}
+.booking-section{background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,147,42,.1) 0%, var(--ink) 65%);padding:clamp(80px,11vw,150px) 3.5rem;}
 .booking-inner{max-width:1300px;margin:0 auto;}
 .booking-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:start;}
 .big-q{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(2.2rem,4.5vw,4rem);line-height:1.15;color:var(--paper);}
@@ -147,7 +148,7 @@ nav.scrolled{background:rgba(12,12,12,.94);backdrop-filter:blur(8px);}
 #fsuccess{display:none;margin-top:1.25rem;font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold2);}
 
 /* ── FOOTER ── */
-footer{background:var(--ink);border-top:1px solid rgba(242,237,230,.07);padding:2.5rem 3.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;}
+footer{background:radial-gradient(ellipse 60% 100% at 50% 100%, rgba(184,147,42,.06) 0%, var(--ink) 70%);border-top:1px solid rgba(242,237,230,.07);padding:2.5rem 3.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;}
 .f-name{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.3em;color:var(--dim-light);}
 .f-copy{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,230,.18);}
 
@@ -180,31 +181,18 @@ footer{background:var(--ink);border-top:1px solid rgba(242,237,230,.07);padding:
     <li><a href="#music">Music</a></li>
     <li><a href="#shows">Shows</a></li>
     <li><a href="#booking">Booking</a></li>
+    <li><a href="epk.html" style="color:var(--gold);">EPK</a></li>
   </ul>
 </nav>
 
 <!-- HERO — dark -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="rule"></div>
-    <div class="hero-eyebrow">
-      <span>DJ &amp; Producer</span>
-      <span>Est. &#8212;</span>
-    </div>
-    <div class="rule"></div>
-    <span class="hero-name">LORD<br>SALIBA</span>
-    <div class="rule"></div>
-    <div class="hero-sub">
-      <span class="hero-role">The Sound of Power</span>
-      <div class="hero-links">
-        <a href="https://soundcloud.com/lordsaliba" target="_blank">SoundCloud</a>
-        <a href="https://www.instagram.com/lordsaliba/" target="_blank">Instagram</a>
-      </div>
-    </div>
-    <div class="rule"></div>
-    <div class="hero-logo-wrap">
-      <img src="logo.png" alt="Lord Saliba">
-    </div>
+  <img src="logo.png" alt="Lord Saliba" class="hero-logo-img">
+  <p class="hero-role">The Sound of Power</p>
+  <div class="rule"></div>
+  <div class="hero-links">
+    <a href="https://soundcloud.com/lordsaliba" target="_blank">SoundCloud</a>
+    <a href="https://www.instagram.com/lordsaliba/" target="_blank">Instagram</a>
   </div>
 </section>
 
