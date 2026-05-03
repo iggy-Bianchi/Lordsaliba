@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Lord Saliba — EPK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0c0c0c;
+  --paper:#f4efe8;
+  --white:#ffffff;
+  --gold:#b8932a;
+  --gold2:#d4a832;
+  --dim:rgba(242,237,230,0.45);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+
+/* LOCK SCREEN */
+#lock{
+  position:fixed;inset:0;z-index:9999;
+  background:radial-gradient(ellipse 90% 70% at 50% 100%, rgba(184,147,42,.15) 0%, var(--ink) 65%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+}
+.lock-logo{width:clamp(120px,18vw,200px);margin-bottom:2.5rem;filter:drop-shadow(0 8px 40px rgba(184,147,42,.3));}
+.lock-label{font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:.6em;color:var(--gold);text-transform:uppercase;margin-bottom:.75rem;}
+.lock-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:.15em;color:var(--paper);margin-bottom:.5rem;}
+.lock-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:1rem;color:rgba(242,237,230,.4);margin-bottom:2.5rem;letter-spacing:.05em;}
+.lock-rule{width:280px;height:1px;background:linear-gradient(to right,transparent,rgba(184,147,42,.4),transparent);margin-bottom:2.5rem;}
+.lock-input-wrap{position:relative;width:280px;margin-bottom:1.25rem;}
+.lock-input{
+  width:100%;background:transparent;border:none;
+  border-bottom:1px solid rgba(242,237,230,.2);
+  color:var(--paper);font-family:'DM Sans',sans-serif;
+  font-size:1.1rem;font-weight:300;letter-spacing:.15em;
+  padding:.75rem 0;text-align:center;outline:none;
+  transition:border-color .25s;
+}
+.lock-input:focus{border-color:var(--gold);}
+.lock-input::placeholder{color:rgba(242,237,230,.25);letter-spacing:.2em;font-size:.8rem;}
+.lock-btn{
+  width:280px;background:transparent;border:1px solid rgba(184,147,42,.4);
+  color:var(--gold);font-family:'Bebas Neue',sans-serif;
+  font-size:1rem;letter-spacing:.35em;padding:.85rem;
+  cursor:pointer;transition:all .25s;text-transform:uppercase;
+}
+.lock-btn:hover{background:var(--gold);color:var(--ink);}
+.lock-error{
+  font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#c0392b;margin-top:.75rem;
+  opacity:0;transition:opacity .3s;
+}
+.lock-error.show{opacity:1;}
+.lock-hint{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,230,.15);margin-top:2rem;}
+
+/* EPK CONTENT - hidden until unlocked */
+#epk-content{display:none;}
+
+/* NAV */
+.epk-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.25rem 3.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(12,12,12,.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(184,147,42,.1);
+}
+.epk-nav-mark{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.3em;color:var(--paper);text-decoration:none;}
+.epk-badge{font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.4em;color:var(--gold);border:1px solid rgba(184,147,42,.3);padding:.3rem .8rem;text-transform:uppercase;}
+
+/* HERO */
+.epk-hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 3.5rem 80px;
+  background:radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184,147,42,.14) 0%, var(--ink) 70%);
+  text-align:center;
+}
+.epk-logo{width:clamp(160px,20vw,260px);margin-bottom:2rem;filter:drop-shadow(0 10px 50px rgba(184,147,42,.3));}
+.epk-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);letter-spacing:.1em;color:var(--paper);line-height:.9;margin-bottom:.5rem;}
+.epk-role{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);color:var(--gold2);letter-spacing:.08em;margin-bottom:2rem;}
+.epk-rule{width:min(400px,70vw);height:1px;background:linear-gradient(to right,transparent,rgba(184,147,42,.4),transparent);margin:0 auto 2rem;}
+.epk-tagline{font-size:1.05rem;line-height:1.8;color:rgba(242,237,230,.55);max-width:480px;font-style:italic;}
+
+/* SECTIONS */
+.epk-section{padding:clamp(70px,10vw,120px) 3.5rem;max-width:1100px;margin:0 auto;}
+.epk-section-full{max-width:none;}
+.ch{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
+.ch::after{content:'';flex:1;height:1px;background:rgba(242,237,230,.1);}
+.section-head{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);line-height:.9;color:var(--paper);margin-bottom:2.5rem;}
+
+/* BIO */
+.bio-text p{font-size:1.1rem;line-height:1.9;color:rgba(242,237,230,.72);margin-bottom:1.5rem;}
+.bio-text p strong{color:var(--paper);font-weight:400;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(242,237,230,.07);border:1px solid rgba(242,237,230,.07);margin-top:2rem;}
+.stat-tile{padding:2rem 1.5rem;background:var(--ink);text-align:center;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:var(--gold2);line-height:1;display:block;}
+.stat-label{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(242,237,230,.4);margin-top:.5rem;display:block;}
+
+/* TRACKS */
+.tracks-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:1rem;}
+.track-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;}
+.track-embed iframe{display:block;width:100%;border:none;}
+
+/* TECH RIDER */
+.rider-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:1rem;}
+.rider-col h4{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.1em;color:var(--gold2);margin-bottom:1rem;}
+.rider-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.rider-list li{font-size:.95rem;line-height:1.6;color:rgba(242,237,230,.65);padding-left:1rem;position:relative;}
+.rider-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:.75rem;}
+
+/* CONTACT — white section */
+.contact-section{background:var(--white);padding:clamp(70px,10vw,120px) 3.5rem;}
+.contact-inner{max-width:1100px;margin:0 auto;}
+.ch-light{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
+.ch-light::after{content:'';flex:1;height:1px;background:rgba(12,12,12,.12);}
+.contact-head{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);line-height:.9;color:var(--ink);margin-bottom:3rem;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(12,12,12,.08);border:1px solid rgba(12,12,12,.08);}
+.contact-tile{background:var(--white);padding:2rem 2rem;}
+.contact-tile .ct-role{font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.5rem;}
+.contact-tile .ct-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--ink);letter-spacing:.04em;display:block;margin-bottom:.75rem;}
+.contact-tile .ct-detail{display:flex;flex-direction:column;gap:.35rem;}
+.contact-tile .ct-detail a{font-size:.95rem;color:rgba(12,12,12,.65);text-decoration:none;transition:color .2s;}
+.contact-tile .ct-detail a:hover{color:var(--gold);}
+.contact-tile .ct-detail span{font-size:.95rem;color:rgba(12,12,12,.65);}
+
+/* CONFIDENTIAL FOOTER */
+.epk-footer{
+  background:var(--ink);border-top:1px solid rgba(242,237,230,.07);
+  padding:2rem 3.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;
+}
+.epk-footer-name{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.3em;color:rgba(242,237,230,.3);}
+.epk-footer-conf{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,230,.15);}
+
+@media(max-width:768px){
+  .epk-nav{padding:1rem 1.5rem;}
+  .epk-hero{padding:100px 1.5rem 60px;}
+  .epk-section{padding:60px 1.5rem;}
+  .stats-grid{grid-template-columns:1fr;}
+  .rider-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .contact-section{padding:60px 1.5rem;}
+  .epk-footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem 3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lock">
+  <img src="logo.png" alt="Lord Saliba" class="lock-logo">
+  <span class="lock-label">Restricted Access</span>
+  <h1 class="lock-title">EPK</h1>
+  <p class="lock-sub">Electronic Press Kit</p>
+  <div class="lock-rule"></div>
+  <div class="lock-input-wrap">
+    <input type="password" class="lock-input" id="pw-input" placeholder="Enter passphrase" onkeydown="if(event.key==='Enter')unlock()">
+  </div>
+  <button class="lock-btn" onclick="unlock()">Enter the Kingdom</button>
+  <p class="lock-error" id="pw-error">Access denied. Try again.</p>
+  <p class="lock-hint">Confidential — not for public distribution</p>
+</div>
+
+<!-- EPK CONTENT -->
+<div id="epk-content">
+
+  <nav class="epk-nav">
+    <a href="/" class="epk-nav-mark">Lord Saliba</a>
+    <span class="epk-badge">EPK — Confidential</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="epk-hero">
+    <img src="logo.png" alt="Lord Saliba" class="epk-logo">
+    <h1 class="epk-name">Lord Saliba</h1>
+    <p class="epk-role">DJ &amp; Producer</p>
+    <div class="epk-rule"></div>
+    <p class="epk-tagline">"The sound of power. Built for rooms that demand presence."</p>
+  </section>
+
+  <!-- BIO -->
+  <div class="epk-section">
+    <div class="ch">Biography</div>
+    <h2 class="section-head">About<br>the Artist</h2>
+    <div class="bio-text">
+      <p>Lord Saliba is a DJ and producer built for rooms that demand <strong>presence</strong>. His sound is precise, cinematic, and uncompromising. Every set is constructed like a score — layered with intention, built for impact.</p>
+      <p>From underground floors to festival stages, the name carries weight. Drawing from hip-hop, electronic, and pop influences, Lord Saliba crafts edits and originals that bridge the gap between the DJ booth and the mainstream.</p>
+      <p>His flips and remixes have gained traction across social platforms, earning him a reputation as a producer with a sharp ear for what moves a crowd. This is not background music. This is a <strong>statement</strong>.</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="epk-section" style="padding-top:0;">
+    <div class="ch">By the Numbers</div>
+    <div class="stats-grid">
+      <div class="stat-tile">
+        <span class="stat-num">—</span>
+        <span class="stat-label">Monthly Listeners</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">—</span>
+        <span class="stat-label">SoundCloud Followers</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num">—</span>
+        <span class="stat-label">Instagram Followers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <div class="epk-section" style="background:radial-gradient(ellipse 70% 60% at 100% 50%, rgba(184,147,42,.07) 0%, transparent 65%);">
+    <div class="ch">Music</div>
+    <h2 class="section-head">Featured<br>Tracks</h2>
+    <div class="tracks-list">
+      <div>
+        <p class="track-label">How It Was — Lord Saliba Flip</p>
+        <div class="track-embed">
+          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/how-it-was-lord-saliba-flip&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+          </iframe>
+        </div>
+      </div>
+      <div>
+        <p class="track-label">iloveyouiloveyou</p>
+        <div class="track-embed">
+          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/iloveyouiloveyou&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+          </iframe>
+        </div>
+      </div>
+      <div>
+        <p class="track-label">Cool for the Summer — Lord Saliba Edit</p>
+        <div class="track-embed">
+          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/cool-for-the-summer-lord&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH RIDER -->
+  <div class="epk-section">
+    <div class="ch">Technical</div>
+    <h2 class="section-head">Tech<br>Rider</h2>
+    <div class="rider-grid">
+      <div class="rider-col">
+        <h4>Equipment</h4>
+        <ul class="rider-list">
+          <li>2x Pioneer CDJ-2000NXS2 (or equivalent)</li>
+          <li>1x Pioneer DJM-900NXS2 mixer (or equivalent)</li>
+          <li>Booth monitor with dedicated feed</li>
+          <li>Stable internet connection at booth (preferred)</li>
+        </ul>
+      </div>
+      <div class="rider-col">
+        <h4>Hospitality</h4>
+        <ul class="rider-list">
+          <li>Guest list: [TBD per show]</li>
+          <li>Dedicated green room or artist area</li>
+          <li>Water and light refreshments</li>
+          <li>Set time confirmation minimum 48hrs prior</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT — white -->
+  <section class="contact-section">
+    <div class="contact-inner">
+      <div class="ch-light">Contact</div>
+      <h2 class="contact-head">Get in<br>Touch</h2>
+      <div class="contact-grid">
+        <div class="contact-tile">
+          <span class="ct-role">Bookings &amp; Management</span>
+          <span class="ct-name">Lord Saliba</span>
+          <div class="ct-detail">
+            <a href="mailto:booking@lordsaliba.com">booking@lordsaliba.com</a>
+            <span>Update with real email</span>
+            <a href="https://www.instagram.com/lordsaliba/" target="_blank">@lordsaliba</a>
+          </div>
+        </div>
+        <div class="contact-tile">
+          <span class="ct-role">Press &amp; Media</span>
+          <span class="ct-name">Inquiries</span>
+          <div class="ct-detail">
+            <a href="mailto:press@lordsaliba.com">press@lordsaliba.com</a>
+            <span>Update with real email</span>
+            <a href="https://soundcloud.com/lordsaliba" target="_blank">SoundCloud</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="epk-footer">
+    <span class="epk-footer-name">Lord Saliba EPK</span>
+    <span class="epk-footer-conf">Confidential — not for public distribution &nbsp;&middot;&nbsp; &copy; 2026 Lord Saliba</span>
+  </footer>
+
+</div>
+
+<script>
+function unlock(){
+  const val = document.getElementById('pw-input').value.trim();
+  const err = document.getElementById('pw-error');
+  if(val === 'TheCrown'){
+    document.getElementById('lock').style.display = 'none';
+    document.getElementById('epk-content').style.display = 'block';
+    sessionStorage.setItem('ls-epk','1');
+  } else {
+    err.classList.add('show');
+    document.getElementById('pw-input').value = '';
+    setTimeout(()=>err.classList.remove('show'), 3000);
+  }
+}
+// persist unlock within session
+if(sessionStorage.getItem('ls-epk')==='1'){
+  document.getElementById('lock').style.display='none';
+  document.getElementById('epk-content').style.display='block';
+}
+</script>
+</body>
+</html>
