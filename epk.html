@@ -203,9 +203,45 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
   .stats-row{grid-template-columns:1fr;}
   .epk-footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem 3rem;}
 }
+
+
+
+/* SWORD CURSOR — desktop only */
+@media (pointer: fine) {
+  body { cursor: none; }
+  #sword-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    width: 32px;
+    height: 32px;
+    transform: translate(-4px, -4px) rotate(-45deg);
+    transition: transform 0.1s ease, filter 0.1s ease;
+    filter: drop-shadow(0 0 6px rgba(184,147,42,.6));
+    display: none;
+  }
+  body.cursor-ready #sword-cursor { display: block; }
+  a, button, [onclick] { cursor: none; }
+}
 </style>
 </head>
 <body>
+<!-- SWORD CURSOR -->
+<div id="sword-cursor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="blade-grad" x1="16" y1="1" x2="16" y2="14" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f0d878"/>
+      <stop offset="100%" stop-color="#b8932a"/>
+    </linearGradient>
+  </defs>
+  <polygon points="16,1 18,14 14,14" fill="url(#blade-grad)"/>
+  <rect x="9" y="14" width="14" height="2.5" rx="1.25" fill="#d4a832"/>
+  <rect x="14.5" y="16.5" width="3" height="8" rx="1.5" fill="#8b6914"/>
+  <circle cx="16" cy="26.5" r="2.5" fill="#b8932a"/>
+  <line x1="16" y1="3" x2="16" y2="13" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+</svg>
+</div>
 
 <!-- LOCK -->
 <div id="lock">
@@ -431,6 +467,31 @@ function closeMenu(){
 }
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:0.07});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+
+
+
+
+// Sword cursor — desktop only
+(function(){
+  if(window.matchMedia('(pointer: fine)').matches){
+    document.body.classList.add('cursor-ready');
+    const el = document.getElementById('sword-cursor');
+    if(!el) return;
+    document.addEventListener('mousemove',function(e){
+      el.style.left = e.clientX + 'px';
+      el.style.top  = e.clientY + 'px';
+    });
+    document.addEventListener('mousedown',function(){
+      el.style.transform='translate(-4px,-4px) rotate(-30deg) scale(.9)';
+      el.style.filter='drop-shadow(0 0 10px rgba(184,147,42,.9))';
+    });
+    document.addEventListener('mouseup',function(){
+      el.style.transform='translate(-4px,-4px) rotate(-45deg) scale(1)';
+      el.style.filter='drop-shadow(0 0 6px rgba(184,147,42,.6))';
+    });
+  }
+})();
 </script>
 </body>
 </html>
