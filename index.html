@@ -3,205 +3,343 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Lord Saliba — EPK</title>
+<title>Lord Saliba — No Kingdom Without Chaos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --ink:#0a0a0a;
-  --paper:#f4efe8;
-  --white:#ffffff;
+  --ink:#060606;
   --gold:#b8932a;
   --gold2:#d4a832;
-  --dim:rgba(242,237,230,0.45);
+  --gold-pale:#f0d878;
+  --paper:#f4efe8;
+  --white:#ffffff;
+  --dim:rgba(244,239,232,0.5);
+  --dim2:rgba(244,239,232,0.25);
 }
 html{scroll-behavior:smooth;}
-body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
 
-/* LOCK */
-#lock{
-  position:fixed;inset:0;z-index:9999;
-  background:radial-gradient(ellipse 90% 70% at 50% 100%, rgba(184,147,42,.18) 0%, var(--ink) 65%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:1rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .3s;
 }
-.lock-logo{width:clamp(130px,18vw,190px);margin-bottom:2.5rem;filter:drop-shadow(0 8px 50px rgba(184,147,42,.4));}
-.lock-eyebrow{font-size:.58rem;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
-.lock-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:.2em;color:var(--paper);margin-bottom:.4rem;}
-.lock-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:.95rem;color:rgba(242,237,230,.35);margin-bottom:2.5rem;}
-.lock-rule{width:260px;height:1px;background:linear-gradient(to right,transparent,rgba(184,147,42,.4),transparent);margin-bottom:2.5rem;}
-.lock-input{
-  width:260px;display:block;background:transparent;border:none;
-  border-bottom:1px solid rgba(242,237,230,.2);color:var(--paper);
-  font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:300;
-  letter-spacing:.2em;padding:.75rem 0;text-align:center;outline:none;
-  transition:border-color .25s;margin-bottom:1.25rem;
-}
-.lock-input:focus{border-color:var(--gold);}
-.lock-input::placeholder{color:rgba(242,237,230,.2);letter-spacing:.25em;font-size:.8rem;}
-.lock-btn{
-  width:260px;display:block;background:transparent;
-  border:1px solid rgba(184,147,42,.4);color:var(--gold);
-  font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.4em;
-  padding:.85rem;cursor:pointer;transition:all .25s;
-}
-.lock-btn:hover{background:var(--gold);color:var(--ink);}
-.lock-error{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#c0392b;margin-top:.85rem;opacity:0;transition:opacity .3s;}
-.lock-error.show{opacity:1;}
-.lock-hint{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,230,.12);margin-top:2rem;}
-
-/* EPK */
-#epk{display:none;}
-
-/* NAV */
-.epk-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:1.1rem 3.5rem;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(10,10,10,.96);backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(184,147,42,.1);
-}
-.epk-nav-mark{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.3em;color:var(--paper);text-decoration:none;}
-.epk-badge{font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,147,42,.25);padding:.3rem .9rem;}
+nav.scrolled{background:rgba(6,6,6,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(184,147,42,.12);}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;}
+.nav-logo img{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(184,147,42,.3));}
+.nav-logo span{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold2);}
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-epk{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,147,42,.35);padding:.4rem .9rem;text-decoration:none;transition:all .2s;}
+.nav-epk:hover{background:var(--gold);color:var(--ink);}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .hamburger span{display:block;width:24px;height:1.5px;background:var(--paper);transition:all .3s;}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,10,10,.98);backdrop-filter:blur(12px);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:190;background:rgba(6,6,6,.98);backdrop-filter:blur(14px);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,7vw,3.5rem);letter-spacing:.15em;color:var(--paper);text-decoration:none;transition:color .2s;}
+.mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,4rem);letter-spacing:.15em;color:var(--paper);text-decoration:none;transition:color .2s;}
 .mobile-menu a:hover{color:var(--gold2);}
+.mobile-menu a.gold{color:var(--gold);}
 .mm-rule{width:50px;height:1px;background:rgba(184,147,42,.25);}
-@media(max-width:768px){.epk-badge{display:none;}.hamburger{display:flex;}}
 
-/* HERO — split layout */
-.epk-hero{
-  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
-  background:radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184,147,42,.14) 0%, var(--ink) 68%);
-  padding-top:64px;overflow:hidden;
+/* ── HERO ── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;
+  overflow:hidden;
 }
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,8vw,120px) clamp(2rem,5vw,5rem);}
-.hero-eyebrow{font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:.88;color:var(--paper);margin-bottom:1.25rem;}
-.hero-name span{color:var(--gold2);}
-.hero-tagline{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.5rem);color:var(--gold2);margin-bottom:1.5rem;letter-spacing:.05em;}
-.hero-genres{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2rem;}
-.genre-tag{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;border:1px solid rgba(184,147,42,.3);color:var(--gold);padding:.4rem .9rem;}
-.hero-rule{width:100%;height:1px;background:rgba(242,237,230,.1);margin-bottom:1.5rem;}
-.hero-location{font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--dim);}
-.hero-right{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(184,147,42,.06),transparent);}
-.hero-right img{width:clamp(200px,60%,380px);filter:drop-shadow(0 10px 60px rgba(184,147,42,.3));}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('hero.jpg') center top/cover no-repeat;
+  filter:brightness(.45) saturate(.8);
+  transform:scale(1.03);
+  transition:transform 8s ease;
+}
+.hero-bg.loaded{transform:scale(1);}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 80% at 30% 50%, rgba(184,147,42,.08) 0%, transparent 60%),
+    linear-gradient(to right, rgba(6,6,6,.85) 40%, rgba(6,6,6,.2) 100%),
+    linear-gradient(to top, rgba(6,6,6,.9) 0%, transparent 40%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:clamp(120px,15vw,180px) 3rem clamp(80px,10vw,120px);
+  max-width:780px;
+}
+.hero-logo-img{
+  width:clamp(60px,7vw,90px);
+  margin-bottom:1.5rem;
+  filter:drop-shadow(0 4px 20px rgba(184,147,42,.4));
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,16vw,14rem);
+  line-height:.85;
+  letter-spacing:.02em;
+  background:linear-gradient(135deg, var(--gold-pale) 0%, var(--gold2) 40%, var(--gold) 70%, #8b6914 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 4px 30px rgba(184,147,42,.3));
+  margin-bottom:.75rem;
+}
+.hero-subtitle{
+  font-family:'Cinzel',serif;font-size:clamp(.7rem,1.5vw,1rem);
+  letter-spacing:.5em;color:var(--gold2);text-transform:uppercase;
+  margin-bottom:.75rem;
+}
+.hero-tagline{
+  font-family:'Cinzel',serif;font-size:clamp(.75rem,1.5vw,.95rem);
+  letter-spacing:.3em;color:rgba(244,239,232,.6);text-transform:uppercase;
+  margin-bottom:2.5rem;line-height:1.8;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.75rem;
+  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(184,147,42,.5);
+  padding:.85rem 2rem;text-decoration:none;transition:all .25s;
+}
+.hero-cta:hover{background:var(--gold);color:var(--ink);}
+.hero-cta svg{width:14px;height:14px;fill:currentColor;}
 
-/* SECTIONS */
-.epk-section{padding:clamp(70px,10vw,130px) clamp(2rem,5vw,5rem);max-width:1200px;margin:0 auto;}
-.ch{font-size:.55rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
-.ch::after{content:'';flex:1;height:1px;background:rgba(242,237,230,.08);}
-.section-head{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.88;color:var(--paper);margin-bottom:2.5rem;}
+/* Social sidebar */
+.hero-socials{
+  position:absolute;right:2rem;top:50%;transform:translateY(-50%);
+  z-index:2;display:flex;flex-direction:column;gap:1.25rem;align-items:center;
+}
+.hero-socials a{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border:1px solid rgba(184,147,42,.2);
+  color:var(--dim);text-decoration:none;transition:all .25s;
+  font-size:.7rem;
+}
+.hero-socials a:hover{border-color:var(--gold);color:var(--gold);}
+.hero-socials svg{width:16px;height:16px;fill:currentColor;}
 
-/* BIO */
-.bio-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start;}
-.bio-body p{font-size:1.05rem;line-height:1.9;color:rgba(242,237,230,.68);margin-bottom:1.4rem;}
-.bio-body p strong{color:var(--paper);font-weight:400;}
-.bio-quote{border-left:2px solid var(--gold);padding:1.5rem;background:rgba(184,147,42,.04);margin-top:2rem;}
-.bio-quote p{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.15rem;line-height:1.7;color:var(--paper);}
-.bio-quote cite{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-top:.75rem;}
-.sound-block h4,.influences-block h4,.avail-block h4{font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;}
-.sound-item{margin-bottom:1.1rem;}
-.sound-name{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--paper);letter-spacing:.05em;line-height:1;display:block;}
-.sound-desc{font-family:'DM Serif Display',serif;font-style:italic;font-size:.88rem;color:var(--dim);display:block;margin-top:.1rem;}
-.sound-divider{height:1px;background:rgba(242,237,230,.07);margin:1rem 0;}
-.inf-list,.avail-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
-.inf-list li,.avail-list li{font-size:.95rem;color:rgba(242,237,230,.5);}
+/* ── ABOUT ── */
+.about-section{
+  background:radial-gradient(ellipse 60% 80% at 0% 50%, rgba(184,147,42,.07) 0%, var(--ink) 60%);
+  padding:clamp(80px,12vw,150px) 3rem;
+}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:4rem;align-items:start;}
+.about-left{}
+.about-left img{width:clamp(80px,10vw,140px);filter:drop-shadow(0 6px 30px rgba(184,147,42,.3));margin-bottom:2rem;display:block;}
+.about-eyebrow{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.about-subhead{font-family:'Cinzel',serif;font-size:clamp(1.2rem,2.5vw,1.8rem);line-height:1.3;color:var(--paper);font-weight:600;}
+.about-center{}
+.about-body p{font-size:1.05rem;line-height:1.9;color:rgba(244,239,232,.68);margin-bottom:1.25rem;}
+.about-body p strong{color:var(--paper);font-weight:400;}
+.about-statement{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.15rem;color:var(--gold2);margin:1.5rem 0;line-height:1.6;}
+.about-sig{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.8rem;color:var(--gold);display:block;margin:1.5rem 0;}
+.about-btn{
+  display:inline-flex;align-items:center;gap:.75rem;
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(184,147,42,.4);
+  padding:.75rem 1.75rem;text-decoration:none;transition:all .25s;
+}
+.about-btn:hover{background:var(--gold);color:var(--ink);}
+.about-btn svg{width:14px;height:14px;fill:currentColor;}
+.code-block{
+  border:1px solid rgba(184,147,42,.15);padding:2rem;
+  background:rgba(184,147,42,.03);
+}
+.code-title{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block;}
+.code-item{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1.25rem;}
+.code-item:last-child{margin-bottom:0;}
+.code-icon{width:28px;height:28px;border:1px solid rgba(184,147,42,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:.7rem;}
+.code-name{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--paper);display:block;}
+.code-desc{font-size:.7rem;color:var(--dim2);display:block;margin-top:.15rem;letter-spacing:.05em;}
 
-/* HIGHLIGHTS */
-.highlights-bg{background:radial-gradient(ellipse 70% 60% at 100% 50%, rgba(184,147,42,.08) 0%, var(--ink) 65%);padding:clamp(70px,10vw,130px) 0;}
-.highlights-inner{max-width:1200px;margin:0 auto;padding:0 clamp(2rem,5vw,5rem);}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(242,237,230,.07);border:1px solid rgba(242,237,230,.07);margin-bottom:3.5rem;}
-.stat-tile{padding:2.5rem 1.5rem;background:var(--ink);text-align:center;}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);color:var(--gold2);line-height:1;display:block;}
-.stat-label{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(242,237,230,.32);margin-top:.5rem;display:block;}
-.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-.ach-item{display:flex;gap:1.25rem;align-items:flex-start;padding:1.5rem;border:1px solid rgba(242,237,230,.06);}
-.ach-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;margin-top:.1rem;}
-.ach-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.08em;color:var(--gold2);display:block;margin-bottom:.3rem;}
-.ach-desc{font-size:.9rem;line-height:1.65;color:rgba(242,237,230,.48);}
-.projects-list{margin-top:.5rem;display:flex;flex-direction:column;gap:.65rem;}
-.projects-list li{font-size:1rem;color:rgba(242,237,230,.58);padding-left:1.25rem;position:relative;list-style:none;}
-.projects-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
-
-/* MUSIC — white */
-.music-section{padding:clamp(70px,10vw,130px) 0;background:var(--white);}
-.music-inner{max-width:1200px;margin:0 auto;padding:0 clamp(2rem,5vw,5rem);}
-.music-inner .ch,.music-inner .ch::after{color:var(--gold);}
-.music-inner .ch::after{background:rgba(12,12,12,.12);}
-.music-inner .section-head{color:var(--ink);}
-.music-desc{font-size:1rem;line-height:1.8;color:rgba(12,12,12,.5);margin-bottom:2.5rem;max-width:520px;}
+/* ── MUSIC ── */
+.music-section{background:var(--white);padding:clamp(80px,12vw,150px) 3rem;}
+.music-inner{max-width:1200px;margin:0 auto;}
+.section-eyebrow{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:rgba(12,12,12,.1);}
+.section-head-dark{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.88;color:var(--ink);margin-bottom:.75rem;}
+.music-subhead{font-size:1rem;color:rgba(12,12,12,.45);margin-bottom:3rem;line-height:1.7;max-width:500px;}
 .tracks-grid{display:flex;flex-direction:column;gap:1.5rem;}
-.track-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(12,12,12,.38);margin-bottom:.5rem;}
-.track-embed iframe{display:block;width:100%;border:none;}
+.track-item{}
+.track-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(12,12,12,.38);margin-bottom:.5rem;display:block;}
+.track-item iframe{display:block;width:100%;border:none;}
+.sc-profile-link{
+  display:inline-flex;align-items:center;gap:.75rem;margin-top:2.5rem;
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(184,147,42,.4);
+  padding:.75rem 1.75rem;text-decoration:none;transition:all .25s;
+}
+.sc-profile-link:hover{background:var(--gold);color:var(--ink);}
 
-/* TECH RIDER */
-.rider-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
-.rider-col h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;color:var(--gold2);margin-bottom:1.25rem;}
-.rider-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;}
-.rider-list li{font-size:.95rem;line-height:1.6;color:rgba(242,237,230,.58);padding-left:1.25rem;position:relative;}
-.rider-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+/* ── CARDS ── */
+.cards-section{
+  background:radial-gradient(ellipse 70% 60% at 100% 50%, rgba(184,147,42,.08) 0%, var(--ink) 65%);
+  padding:clamp(80px,12vw,150px) 3rem;
+}
+.cards-inner{max-width:1200px;margin:0 auto;}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,147,42,.1);border:1px solid rgba(184,147,42,.1);}
+.card{
+  background:var(--ink);padding:3rem 2.5rem;display:flex;flex-direction:column;gap:1rem;
+  position:relative;overflow:hidden;transition:background .25s;
+}
+.card:hover{background:#0d0d0d;}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  opacity:0;transition:opacity .25s;
+}
+.card:hover::before{opacity:1;}
+.card-eyebrow{font-size:.55rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.08em;color:var(--paper);line-height:1;}
+.card-desc{font-size:.9rem;line-height:1.75;color:rgba(244,239,232,.5);flex:1;}
+.card-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(184,147,42,.3);
+  padding:.65rem 1.25rem;text-decoration:none;transition:all .25s;align-self:flex-start;
+}
+.card-btn:hover{background:var(--gold);color:var(--ink);}
+.card-btn svg{width:12px;height:12px;fill:currentColor;}
 
-/* CONTACT — white */
-.contact-section{padding:clamp(70px,10vw,130px) 0;background:var(--white);}
-.contact-inner{max-width:1200px;margin:0 auto;padding:0 clamp(2rem,5vw,5rem);}
-.contact-inner .ch{color:var(--gold);}
-.contact-inner .ch::after{background:rgba(12,12,12,.12);}
-.contact-inner .section-head{color:var(--ink);}
-.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(12,12,12,.08);border:1px solid rgba(12,12,12,.08);}
-.contact-tile{background:var(--white);padding:2.5rem 2rem;}
-.ct-role{font-size:.56rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.5rem;}
-.ct-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--ink);letter-spacing:.04em;display:block;margin-bottom:1.25rem;line-height:1;}
-.ct-details{display:flex;flex-direction:column;gap:.6rem;}
-.ct-details a,.ct-details span{font-size:.95rem;color:rgba(12,12,12,.58);text-decoration:none;display:flex;align-items:center;gap:.65rem;transition:color .2s;}
-.ct-details a:hover{color:var(--gold);}
-.ct-icon{font-size:1rem;width:20px;text-align:center;color:var(--gold);}
-.social-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(12,12,12,.08);margin-top:1px;}
-.social-tile{background:var(--white);padding:1.75rem 1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:.5rem;transition:background .2s;}
-.social-tile:hover{background:#f7f4ef;}
-.s-platform{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}
-.s-handle{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--ink);letter-spacing:.05em;line-height:1;}
-.s-arrow{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,12,12,.28);margin-top:.25rem;transition:color .2s,letter-spacing .2s;}
-.social-tile:hover .s-arrow{color:var(--gold2);letter-spacing:.38em;}
-.release-bar{padding:1.5rem 2rem;background:var(--ink);display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1px;}
-.release-bar span{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;}
-.rb-rule{flex:1;height:1px;background:rgba(184,147,42,.2);max-width:120px;}
+/* ── SHOWS ── */
+.shows-section{
+  background:radial-gradient(ellipse 60% 80% at 0% 50%, rgba(184,147,42,.07) 0%, var(--ink) 60%);
+  padding:clamp(80px,12vw,150px) 3rem;
+}
+.shows-inner{max-width:1200px;margin:0 auto;}
+.section-eyebrow-light{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.section-eyebrow-light::after{content:'';flex:1;height:1px;background:rgba(242,237,230,.08);}
+.section-head-light{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.88;color:var(--paper);margin-bottom:3rem;}
+.shows-list{}
+.show-row{display:grid;grid-template-columns:4.5rem 1fr auto;align-items:center;gap:2.5rem;padding:1.6rem 0;border-bottom:1px solid rgba(242,237,230,.07);}
+.show-row:first-child{border-top:1px solid rgba(242,237,230,.07);}
+.show-row:hover .show-num{color:var(--gold2);}
+.show-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:rgba(242,237,230,.1);transition:color .25s;line-height:1;text-align:right;}
+.show-event{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.2rem;color:var(--paper);display:block;}
+.show-meta{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);display:block;margin-top:.3rem;}
+.show-btn{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(184,147,42,.3);padding:.5rem 1rem;transition:all .25s;white-space:nowrap;}
+.show-btn:hover{background:var(--gold);color:var(--ink);}
 
-/* FOOTER */
-.epk-footer{
-  background:radial-gradient(ellipse 60% 100% at 50% 100%, rgba(184,147,42,.07) 0%, var(--ink) 70%);
-  border-top:1px solid rgba(242,237,230,.07);
-  padding:2.5rem clamp(2rem,5vw,5rem) 4rem;
+/* ── JOIN / EMAIL ── */
+.join-section{
+  background:var(--ink);
+  border-top:1px solid rgba(184,147,42,.1);
+  border-bottom:1px solid rgba(184,147,42,.1);
+  padding:clamp(60px,8vw,100px) 3rem;
+}
+.join-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.join-left{}
+.join-eyebrow{font-size:.56rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.75rem;}
+.join-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4.5rem);line-height:.9;color:var(--paper);margin-bottom:.75rem;}
+.join-sub{font-size:.9rem;color:var(--dim);line-height:1.7;}
+.join-form{display:flex;gap:0;}
+.join-input{
+  flex:1;background:transparent;border:1px solid rgba(184,147,42,.25);border-right:none;border-bottom:none;
+  color:var(--paper);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:300;
+  padding:.85rem 1.25rem;outline:none;transition:border-color .25s;
+}
+.join-input:focus{border-color:var(--gold);}
+.join-input::placeholder{color:rgba(244,239,232,.25);}
+.join-submit{
+  background:var(--gold);color:var(--ink);border:1px solid var(--gold);
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  padding:.85rem 1.5rem;cursor:pointer;transition:background .25s;white-space:nowrap;
+}
+.join-submit:hover{background:var(--gold2);}
+.join-right{text-align:right;}
+.join-quote{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(1.2rem,2.5vw,2rem);line-height:1.4;color:var(--paper);margin-bottom:1rem;}
+.join-sig{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.4rem;color:var(--gold);}
+
+/* ── CONNECT ── */
+.connect-section{background:var(--white);padding:clamp(80px,12vw,150px) 3rem;}
+.connect-inner{max-width:1200px;margin:0 auto;}
+.connect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(12,12,12,.08);border:1px solid rgba(12,12,12,.08);margin-top:2rem;}
+.connect-tile{background:var(--white);padding:2.25rem 2rem;text-decoration:none;display:flex;flex-direction:column;gap:.6rem;transition:background .2s;}
+.connect-tile:hover{background:#f7f4ef;}
+.ct-platform{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}
+.ct-handle{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--ink);letter-spacing:.04em;line-height:1;}
+.ct-arrow{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,12,12,.28);margin-top:.25rem;transition:color .2s,letter-spacing .2s;}
+.connect-tile:hover .ct-arrow{color:var(--gold2);letter-spacing:.38em;}
+
+/* ── BOOKING ── */
+.booking-section{
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,147,42,.1) 0%, var(--ink) 65%);
+  padding:clamp(80px,12vw,150px) 3rem;
+}
+.booking-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:start;}
+.booking-left .big-q{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(2rem,4vw,3.5rem);line-height:1.15;color:var(--paper);}
+.booking-left p{margin-top:1.75rem;font-size:1rem;line-height:1.8;color:var(--dim);}
+.form-field{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem;}
+.form-field label{font-size:.55rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);}
+.form-field input,.form-field select,.form-field textarea{
+  background:transparent;border:none;border-bottom:1px solid rgba(242,237,230,.16);
+  color:var(--paper);font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:300;
+  padding:.7rem 0;outline:none;transition:border-color .25s;width:100%;resize:none;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold);}
+.form-field select option{background:#111;}
+.form-two{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.form-submit{
+  margin-top:2rem;background:var(--paper);color:var(--ink);border:none;
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.25em;
+  padding:1rem 3rem;cursor:pointer;transition:background .25s;display:block;
+}
+.form-submit:hover{background:var(--gold2);color:var(--ink);}
+#fsuccess{display:none;margin-top:1.25rem;font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold2);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);border-top:1px solid rgba(184,147,42,.1);
+  padding:2.5rem 3rem 3.5rem;
   display:flex;align-items:center;justify-content:space-between;
 }
-.f-name{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.3em;color:rgba(242,237,230,.3);}
-.f-conf{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,237,230,.15);}
+.f-logo{display:flex;align-items:center;gap:.75rem;}
+.f-logo img{width:32px;filter:drop-shadow(0 2px 8px rgba(184,147,42,.25));}
+.f-logo span{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.25em;color:rgba(244,239,232,.3);text-transform:uppercase;}
+.f-copy{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,239,232,.18);}
 
-/* REVEAL */
+
+/* ANNOUNCING SOON */
+.announcing-soon{padding:4rem 0;display:flex;align-items:center;gap:3rem;}
+.announcing-rule{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(184,147,42,.25),transparent);}
+.announcing-content{text-align:center;flex-shrink:0;}
+.announcing-crown{font-size:2.5rem;color:var(--gold);display:block;margin-bottom:1rem;filter:drop-shadow(0 2px 12px rgba(184,147,42,.4));}
+.announcing-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);letter-spacing:.15em;color:var(--paper);line-height:.9;margin-bottom:.75rem;}
+.announcing-sub{font-family:'DM Serif Display',serif;font-style:italic;font-size:1rem;color:var(--dim);margin-bottom:1.75rem;}
+.announcing-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(184,147,42,.4);
+  padding:.75rem 1.75rem;text-decoration:none;transition:all .25s;
+}
+.announcing-btn:hover{background:var(--gold);color:var(--ink);}
+
+/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(36px);transition:opacity .85s ease,transform .85s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .epk-hero{grid-template-columns:1fr;}
-  .hero-right{padding:3rem 2rem;min-height:300px;}
-  .bio-layout,.rider-layout,.ach-grid{grid-template-columns:1fr;gap:2.5rem;}
-  .stats-row{grid-template-columns:repeat(2,1fr);}
-  .contact-layout{grid-template-columns:1fr;}
-  .social-row{grid-template-columns:1fr;}
-}
-@media(max-width:600px){
-  .epk-nav{padding:1rem 1.5rem;}
-  .epk-section,.highlights-inner,.music-inner,.contact-inner{padding-left:1.5rem;padding-right:1.5rem;}
-  .stats-row{grid-template-columns:1fr;}
-  .epk-footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem 3rem;}
+  .nav-links{display:none;}.nav-epk{display:none;}.hamburger{display:flex;}
+  .about-inner{grid-template-columns:1fr;gap:3rem;}
+  .about-left{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;}
+  .cards-grid,.connect-grid{grid-template-columns:1fr;}
+  .join-inner,.booking-inner{grid-template-columns:1fr;gap:3rem;}
+  .join-right{text-align:left;}
+  .shows-section,.booking-section,.about-section,.music-section,.cards-section,.join-section,.connect-section{padding:60px 1.5rem;}
+  .hero-content{padding:120px 1.5rem 80px;}
+  .hero-socials{display:none;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem 3rem;}
+  .show-row{grid-template-columns:3rem 1fr;gap:1rem;}.show-btn{display:none;}
+  .form-two{grid-template-columns:1fr;}
+  nav{padding:1rem 1.5rem;}
 }
 
 
@@ -245,218 +383,312 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
 </svg>
 </div>
 
-<!-- LOCK -->
-<div id="lock">
-  <img src="logo.png" alt="Lord Saliba" class="lock-logo">
-  <p class="lock-eyebrow">Restricted Access</p>
-  <h1 class="lock-title">EPK</h1>
-  <p class="lock-sub">Electronic Press Kit</p>
-  <div class="lock-rule"></div>
-  <input type="password" class="lock-input" id="pw" placeholder="Enter passphrase" onkeydown="if(event.key==='Enter')unlock()">
-  <button class="lock-btn" onclick="unlock()">Enter the Kingdom</button>
-  <p class="lock-error" id="pw-err">Access denied. Try again.</p>
-  <p class="lock-hint">Confidential — not for public distribution</p>
-</div>
-
-<!-- EPK CONTENT -->
-<div id="epk">
-
-  <nav class="epk-nav">
-    <a href="/" class="epk-nav-mark">Lord Saliba</a>
-    <span class="epk-badge">EPK — Confidential</span>
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <img src="logo.png" alt="LS">
+    <span>Lord Saliba</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#shows">Live</a></li>
+    <li><a href="#about">Kingdom</a></li>
+    <li><a href="#booking">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="epk.html" class="nav-epk">EPK</a>
     <button class="hamburger" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="mobile-menu" id="mm">
-    <a href="#bio" onclick="closeMenu()">Bio</a><div class="mm-rule"></div>
-    <a href="#highlights" onclick="closeMenu()">Highlights</a><div class="mm-rule"></div>
-    <a href="#music" onclick="closeMenu()">Music</a><div class="mm-rule"></div>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="epk-hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Electronic Press Kit &nbsp;&middot;&nbsp; 2026</p>
-      <h1 class="hero-name">LORD<br><span>SALIBA</span></h1>
-      <p class="hero-tagline">No Kingdom Without Chaos</p>
-      <div class="hero-genres">
-        <span class="genre-tag">Dubstep</span>
-        <span class="genre-tag">Trap</span>
-        <span class="genre-tag">Future Bass</span>
-      </div>
-      <div class="hero-rule"></div>
-      <p class="hero-location">Knoxville, TN &nbsp;&middot;&nbsp; Dark Luxury Bass Music</p>
-    </div>
-    <div class="hero-right">
-      <img src="logo.png" alt="Lord Saliba">
-    </div>
-  </section>
-
-  <!-- BIO -->
-  <div class="epk-section reveal" id="bio">
-    <div class="ch">About the Artist</div>
-    <h2 class="section-head">Lord<br>Saliba</h2>
-    <div class="bio-layout">
-      <div class="bio-body">
-        <p>Lord Saliba is a <strong>Knoxville-based bass music artist</strong> blending Dubstep, Trap, and Future Bass with the energy of underground club culture.</p>
-        <p>Inspired by the brostep movement of the early 2010s, his sound combines heavy low-end with cinematic drops and dance-focused remixing — designed to connect both bass fans and mainstream nightlife.</p>
-        <p>Starting out DJing living rooms before earning local bookings around Knoxville, Lord Saliba eventually transitioned into music production with Ableton, focusing on creating <strong>high energy flips and club-ready edits</strong> that feel equally at home in festival sets or late-night dancefloors.</p>
-        <p>Drawing inspiration from artists like Zeds Dead and the modern underground bass scene, his goal is simple: create Dubstep that feels powerful, immersive, and accessible while bringing more people into bass music culture.</p>
-        <div class="bio-quote">
-          <p>"I want to make dubstep that's palatable for a general audience while still hitting hard."</p>
-          <cite>— Lord Saliba</cite>
-        </div>
-      </div>
-      <div>
-        <div class="sound-block" style="margin-bottom:2rem;">
-          <h4>Sound</h4>
-          <div class="sound-item"><span class="sound-name">Dubstep</span><span class="sound-desc">Heavy Low End</span></div>
-          <div class="sound-divider"></div>
-          <div class="sound-item"><span class="sound-name">Trap</span><span class="sound-desc">Club Energy</span></div>
-          <div class="sound-divider"></div>
-          <div class="sound-item"><span class="sound-name">Future Bass</span><span class="sound-desc">Wide Cinematic Drops</span></div>
-        </div>
-        <div class="sound-divider"></div>
-        <div class="influences-block" style="margin-top:1.75rem;margin-bottom:1.75rem;">
-          <h4>Influences</h4>
-          <ul class="inf-list"><li>Zeds Dead</li><li>Spoone</li><li>Papa Jay</li><li>Avello</li></ul>
-        </div>
-        <div class="sound-divider"></div>
-        <div class="avail-block" style="margin-top:1.75rem;">
-          <h4>Available For</h4>
-          <ul class="avail-list"><li>Clubs</li><li>Festivals</li><li>Private Events</li><li>Brand Collabs</li></ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HIGHLIGHTS -->
-  <div class="highlights-bg" id="highlights">
-    <div class="highlights-inner reveal">
-      <div class="ch">By the Numbers</div>
-      <h2 class="section-head">Highlights</h2>
-      <div class="stats-row">
-        <div class="stat-tile"><span class="stat-num">4K+</span><span class="stat-label">Plays on Debut Flip</span></div>
-        <div class="stat-tile"><span class="stat-num">Bi-Weekly</span><span class="stat-label">New Music Releases</span></div>
-        <div class="stat-tile"><span class="stat-num">1st Mix</span><span class="stat-label">Debut Mix in Progress</span></div>
-        <div class="stat-tile"><span class="stat-num">Growing</span><span class="stat-label">Knoxville Bass Community</span></div>
-      </div>
-      <div class="ach-grid">
-        <div class="ach-item">
-          <span class="ach-icon">&#9661;</span>
-          <div><span class="ach-title">4,000+ Plays</span><p class="ach-desc">Debut SoundCloud flip surpassed 4,000 plays, establishing early traction in the bass music community.</p></div>
-        </div>
-        <div class="ach-item">
-          <span class="ach-icon">&#9661;</span>
-          <div><span class="ach-title">Consistent Releases</span><p class="ach-desc">New music every other Thursday — building a loyal following through disciplined output and a strong release cadence.</p></div>
-        </div>
-        <div class="ach-item">
-          <span class="ach-icon">&#9661;</span>
-          <div><span class="ach-title">Festival Goals</span><p class="ach-desc">Proactively submitting sets and building toward major festival stages across the region.</p></div>
-        </div>
-        <div class="ach-item">
-          <span class="ach-icon">&#9661;</span>
-          <div><span class="ach-title">Underground Support</span><p class="ach-desc">Growing Knoxville's bass community through local bookings, underground events, and grassroots promotion.</p></div>
-        </div>
-      </div>
-      <div style="margin-top:3rem;">
-        <div class="ch">Current Projects</div>
-        <ul class="projects-list">
-          <li>"Last Friday Night" Remix Release</li>
-          <li>Ongoing flip series &amp; mix projects</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- MUSIC -->
-  <section class="music-section" id="music">
-    <div class="music-inner reveal">
-      <div class="ch">Music</div>
-      <h2 class="section-head">Featured<br>Tracks</h2>
-      <p class="music-desc">Lord Saliba brings heavy low-end, wide cinematic drops, and club energy to every set. Designed for the dancefloor. Inspired by underground culture.</p>
-      <div class="tracks-grid">
-        <div><p class="track-label">Cool for the Summer — Lord Saliba Edit</p>
-          <div class="track-embed"><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/cool-for-the-summer-lord&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe></div>
-        </div>
-        <div><p class="track-label">iloveyouiloveyou</p>
-          <div class="track-embed"><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/iloveyouiloveyou&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe></div>
-        </div>
-        <div><p class="track-label">How It Was — Lord Saliba Flip</p>
-          <div class="track-embed"><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/how-it-was-lord-saliba-flip&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact-section" id="contact">
-    <div class="contact-inner reveal">
-      <div class="ch">Contact</div>
-      <h2 class="section-head">Get in<br>Touch</h2>
-      <div class="contact-layout">
-        <div class="contact-tile">
-          <span class="ct-role">Booking &amp; Management</span>
-          <span class="ct-name">Michael Saliba</span>
-          <div class="ct-details">
-            <a href="mailto:lordsalibamusic@gmail.com"><span class="ct-icon">&#9993;</span>lordsalibamusic@gmail.com</a>
-            <a href="tel:8656037315"><span class="ct-icon">&#9742;</span>(865) 603-7315</a>
-          </div>
-        </div>
-        <div class="contact-tile">
-          <span class="ct-role">Location &amp; Genre</span>
-          <span class="ct-name">Knoxville, TN</span>
-          <div class="ct-details">
-            <span><span class="ct-icon">&#9661;</span>Dubstep / Trap / Future Bass</span>
-            <span><span class="ct-icon">&#9661;</span>Dark Luxury Bass Music</span>
-            <span><span class="ct-icon">&#9661;</span>New Flip Every Other Thursday</span>
-          </div>
-        </div>
-      </div>
-      <div class="social-row">
-        <a href="https://www.instagram.com/lordsaliba/" target="_blank" class="social-tile">
-          <span class="s-platform">Instagram</span><span class="s-handle">@LordSaliba</span><span class="s-arrow">Follow &rarr;</span>
-        </a>
-        <a href="https://soundcloud.com/lordsaliba" target="_blank" class="social-tile">
-          <span class="s-platform">SoundCloud</span><span class="s-handle">Lord Saliba</span><span class="s-arrow">Listen &rarr;</span>
-        </a>
-        <a href="https://www.tiktok.com/@lordsaliba" target="_blank" class="social-tile">
-          <span class="s-platform">TikTok</span><span class="s-handle">@LordSaliba</span><span class="s-arrow">Watch &rarr;</span>
-        </a>
-      </div>
-      <div class="release-bar">
-        <div class="rb-rule"></div>
-        <span>Build a Sound, Building a Movement</span>
-        <div class="rb-rule"></div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="epk-footer">
-    <span class="f-name">Lord Saliba EPK 2026</span>
-    <span class="f-conf">Confidential — not for public distribution &nbsp;&middot;&nbsp; &copy; 2026 Lord Saliba</span>
-  </footer>
-
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mm">
+  <a href="#" onclick="closeMenu()">Home</a><div class="mm-rule"></div>
+  <a href="#music" onclick="closeMenu()">Music</a><div class="mm-rule"></div>
+  <a href="#shows" onclick="closeMenu()">Live</a><div class="mm-rule"></div>
+  <a href="#about" onclick="closeMenu()">Kingdom</a><div class="mm-rule"></div>
+  <a href="#booking" onclick="closeMenu()">Contact</a><div class="mm-rule"></div>
+  <a href="epk.html" class="gold">EPK</a>
 </div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="logo.png" alt="Lord Saliba" class="hero-logo-img">
+    <h1 class="hero-title">LORD<br>SALIBA</h1>
+    <p class="hero-subtitle">Lord of Space</p>
+    <p class="hero-tagline">There is no kingdom<br>without chaos.</p>
+    <a href="#music" class="hero-cta">
+      Enter the Kingdom
+      <svg viewBox="0 0 24 24"><path d="M5 3l3.057-3L20 12 8.057 24 5 21l8.943-9z"/></svg>
+    </a>
+  </div>
+  <!-- Social Sidebar -->
+  <div class="hero-socials">
+    <a href="https://soundcloud.com/lordsaliba" target="_blank" title="SoundCloud">
+      <svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.96 0 1.68-.81 1.68-1.69a1.7 1.7 0 0 0-1.2-1.63c.12-.3.19-.64.19-.97a2.73 2.73 0 0 0-3.24-2.67 3.65 3.65 0 0 0-6.19-1.17zM0 15c0 1.1.9 2 2 2a2 2 0 0 0 2-2V9c0-1.1-.9-2-2-2S0 7.9 0 9v6zm5.79-6.55c0-.8.44-1.5 1.09-1.88V17h4.18V8.87a3.64 3.64 0 0 0-5.27-.42z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/lordsaliba/" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@lordsaliba" target="_blank" title="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT / KINGDOM -->
+<section class="about-section reveal" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <img src="logo.png" alt="Lord Saliba">
+      <span class="about-eyebrow">About the Lord</span>
+      <h3 class="about-subhead">Knoxville Based<br>Bass Music Artist</h3>
+    </div>
+    <div class="about-center">
+      <div class="about-body">
+        <p>Forged in chaos. Built from darkness. Driven by purpose. Lord Saliba is more than an artist — he is a force from another realm. A ruler of sound, emotion, and energy. Creating a kingdom where music unites, liberates, and transforms.</p>
+        <p>Blending Dubstep, Trap, and Future Bass with the energy of underground club culture, his sound combines <strong>heavy low-end</strong> with cinematic drops and dance-focused remixing designed to connect both bass fans and mainstream nightlife.</p>
+        <p class="about-statement">This isn't just a movement.<br>This is a revolution.</p>
+        <span class="about-sig">Lord Saliba</span>
+        <a href="#music" class="about-btn">
+          Read the Manifesto
+          <svg viewBox="0 0 24 24"><path d="M5 3l3.057-3L20 12 8.057 24 5 21l8.943-9z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="code-block">
+        <span class="code-title">The Code</span>
+        <div class="code-item">
+          <div class="code-icon">&#9670;</div>
+          <div><span class="code-name">Loyalty</span><span class="code-desc">Over Everything</span></div>
+        </div>
+        <div class="code-item">
+          <div class="code-icon">&#9670;</div>
+          <div><span class="code-name">Discipline</span><span class="code-desc">Over Feelings</span></div>
+        </div>
+        <div class="code-item">
+          <div class="code-icon">&#9670;</div>
+          <div><span class="code-name">Respect</span><span class="code-desc">Earned, Not Given</span></div>
+        </div>
+        <div class="code-item">
+          <div class="code-icon">&#9670;</div>
+          <div><span class="code-name">Faith</span><span class="code-desc">Keeps Me Grounded</span></div>
+        </div>
+        <div class="code-item">
+          <div class="code-icon">&#9670;</div>
+          <div><span class="code-name">Chaos</span><span class="code-desc">Builds The Kingdom</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section class="music-section reveal" id="music">
+  <div class="music-inner">
+    <div class="section-eyebrow">Music</div>
+    <h2 class="section-head-dark">Latest<br>Tracks</h2>
+    <p class="music-subhead">Bass. Emotion. Energy. Experience the sound of the kingdom.</p>
+    <div class="tracks-grid">
+      <div class="track-item">
+        <span class="track-label">Cool for the Summer — Lord Saliba Edit</span>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/cool-for-the-summer-lord&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+      </div>
+      <div class="track-item">
+        <span class="track-label">iloveyouiloveyou</span>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/iloveyouiloveyou&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+      </div>
+      <div class="track-item">
+        <span class="track-label">How It Was — Lord Saliba Flip</span>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lordsaliba/how-it-was-lord-saliba-flip&color=%23b8932a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+      </div>
+    </div>
+    <a href="https://soundcloud.com/lordsaliba" target="_blank" class="sc-profile-link">View All on SoundCloud &rarr;</a>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="cards-section reveal">
+  <div class="cards-inner">
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-eyebrow">Music</span>
+        <span class="card-title">Listen</span>
+        <p class="card-desc">Bass. Emotion. Energy. Experience the sound of the kingdom.</p>
+        <a href="#music" class="card-btn">Listen Now <svg viewBox="0 0 24 24"><path d="M5 3l3.057-3L20 12 8.057 24 5 21l8.943-9z"/></svg></a>
+      </div>
+      <div class="card">
+        <span class="card-eyebrow">Live</span>
+        <span class="card-title">Shows</span>
+        <p class="card-desc">Bringing chaos to life. See the kingdom in full effect.</p>
+        <a href="#shows" class="card-btn">Upcoming Shows <svg viewBox="0 0 24 24"><path d="M5 3l3.057-3L20 12 8.057 24 5 21l8.943-9z"/></svg></a>
+      </div>
+      <div class="card">
+        <span class="card-eyebrow">Kingdom</span>
+        <span class="card-title">Join</span>
+        <p class="card-desc">Join the empire. Become a part of something eternal.</p>
+        <a href="#join" class="card-btn">Join the Kingdom <svg viewBox="0 0 24 24"><path d="M5 3l3.057-3L20 12 8.057 24 5 21l8.943-9z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWS -->
+<section class="shows-section reveal" id="shows">
+  <div class="shows-inner">
+    <div class="section-eyebrow-light">Live</div>
+    <h2 class="section-head-light">Upcoming<br>Shows</h2>
+
+    <!-- Set has-shows="true" when shows exist, "false" to show announcing soon -->
+    <div id="shows-container" data-has-shows="false">
+
+      <!-- SHOWS LIST — shown when has-shows=true -->
+      <div id="shows-list" style="display:none;">
+        <div class="shows-list">
+          <div class="show-row">
+            <span class="show-num">01</span>
+            <div><span class="show-event">Show Name</span><span class="show-meta">Date &middot; Venue &middot; City, State</span></div>
+            <a href="#" class="show-btn">Tickets</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOUNCING SOON — shown when has-shows=false -->
+      <div id="shows-soon">
+        <div class="announcing-soon">
+          <div class="announcing-rule"></div>
+          <div class="announcing-content">
+            <span class="announcing-crown">&#9813;</span>
+            <h3 class="announcing-text">Announcing Soon</h3>
+            <p class="announcing-sub">The kingdom is expanding. New dates are coming.</p>
+            <a href="#join" class="announcing-btn">Get Notified First</a>
+          </div>
+          <div class="announcing-rule"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JOIN / EMAIL -->
+<section class="join-section reveal" id="join">
+  <div class="join-inner">
+    <div class="join-left">
+      <span class="join-eyebrow">Join the Kingdom</span>
+      <h2 class="join-title">Stay<br>Updated</h2>
+      <p class="join-sub" style="margin-bottom:1.75rem;">Exclusive content. First access. Stay connected to the kingdom.</p>
+      <div class="join-form">
+        <input type="text" class="join-input" id="join-name" placeholder="Your name" style="margin-bottom:0;border-right:none;border-bottom:none;">
+      </div>
+      <div class="join-form" style="margin-top:1px;">
+        <input type="email" class="join-input" id="join-email" placeholder="Your email">
+        <button class="join-submit" onclick="handleJoin(event)">Subscribe</button>
+      </div>
+      <p id="join-success" style="display:none;margin-top:1rem;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);">Welcome to the Kingdom.</p>
+      <p id="join-error" style="display:none;margin-top:1rem;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#c0392b;">Please enter your name and email.</p>
+    </div>
+    <div class="join-right">
+      <p class="join-quote">"I don't follow paths.<br>I build kingdoms."</p>
+      <span class="join-sig">Lord Saliba</span>
+      <!-- Admin view - password protected -->
+      <div style="margin-top:3rem;">
+        <div id="list-locked" style="display:flex;flex-direction:column;gap:.75rem;align-items:flex-end;">
+          <p style="font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,239,232,.2);">Admin Access</p>
+          <div style="display:flex;gap:0;">
+            <input type="password" id="admin-pw" placeholder="Password" style="background:transparent;border:1px solid rgba(184,147,42,.2);border-right:none;color:var(--paper);font-family:DM Sans,sans-serif;font-size:.8rem;padding:.5rem .75rem;outline:none;width:140px;">
+            <button onclick="viewList()" style="background:transparent;border:1px solid rgba(184,147,42,.2);color:var(--gold);font-family:Cinzel,serif;font-size:.55rem;letter-spacing:.2em;padding:.5rem .75rem;cursor:pointer;transition:all .2s;text-transform:uppercase;" onmouseover="this.style.background='rgba(184,147,42,.15)'" onmouseout="this.style.background='transparent'">View List</button>
+          </div>
+          <p id="admin-error" style="display:none;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#c0392b;">Access denied.</p>
+        </div>
+        <div id="list-view" style="display:none;margin-top:1rem;max-height:220px;overflow-y:auto;">
+          <p style="font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;">Kingdom List</p>
+          <div id="list-entries" style="display:flex;flex-direction:column;gap:.5rem;"></div>
+          <button onclick="exportList()" style="margin-top:1rem;background:transparent;border:1px solid rgba(184,147,42,.2);color:var(--gold);font-family:Cinzel,serif;font-size:.55rem;letter-spacing:.2em;padding:.4rem .8rem;cursor:pointer;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.background='rgba(184,147,42,.15)'" onmouseout="this.style.background='transparent'">Export CSV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect-section reveal">
+  <div class="connect-inner">
+    <div class="section-eyebrow">Connect</div>
+    <h2 class="section-head-dark">Follow<br>the Reign</h2>
+    <div class="connect-grid">
+      <a href="https://soundcloud.com/lordsaliba" target="_blank" class="connect-tile">
+        <span class="ct-platform">SoundCloud</span><span class="ct-handle">@lordsaliba</span><span class="ct-arrow">Listen now &rarr;</span>
+      </a>
+      <a href="https://www.instagram.com/lordsaliba/" target="_blank" class="connect-tile">
+        <span class="ct-platform">Instagram</span><span class="ct-handle">@lordsaliba</span><span class="ct-arrow">Follow &rarr;</span>
+      </a>
+      <a href="https://www.tiktok.com/@lordsaliba" target="_blank" class="connect-tile">
+        <span class="ct-platform">TikTok</span><span class="ct-handle">@lordsaliba</span><span class="ct-arrow">Watch &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section reveal" id="booking">
+  <div class="booking-inner">
+    <div class="booking-left">
+      <div class="section-eyebrow-light" style="margin-bottom:1rem;">Booking</div>
+      <p class="big-q">"Ready to make your room unforgettable?"</p>
+      <p>For bookings, collaborations, and press inquiries, reach out below. All requests are reviewed personally.</p>
+    </div>
+    <form onsubmit="handleForm(event)">
+      <div class="form-two">
+        <div class="form-field"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="form-field"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      </div>
+      <div class="form-field">
+        <label>Inquiry Type</label>
+        <select>
+          <option value="">Select...</option>
+          <option>Booking / Performance</option>
+          <option>Collaboration</option>
+          <option>Press / Media</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Message</label><textarea rows="4" placeholder="Tell us about your event..."></textarea></div>
+      <button type="submit" class="form-submit">Send Inquiry</button>
+      <p id="fsuccess">Message received. We will be in touch.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">
+    <img src="logo.png" alt="LS">
+    <span>Lord Saliba</span>
+  </div>
+  <span class="f-copy">&copy; 2026 Lord Saliba. All rights reserved.</span>
+</footer>
 
 <script>
-function unlock(){
-  const val=document.getElementById('pw').value.trim().toLowerCase();
-  const err=document.getElementById('pw-err');
-  if(val==='kingdom'){
-    document.getElementById('lock').style.display='none';
-    document.getElementById('epk').style.display='block';
-    sessionStorage.setItem('ls-epk','1');
-  } else {
-    err.classList.add('show');
-    document.getElementById('pw').value='';
-    setTimeout(()=>err.classList.remove('show'),3000);
-  }
-}
-if(sessionStorage.getItem('ls-epk')==='1'){
-  document.getElementById('lock').style.display='none';
-  document.getElementById('epk').style.display='block';
-}
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// Hero BG ken burns
+window.addEventListener('load',()=>{
+  document.getElementById('heroBg').classList.add('loaded');
+});
+
+// Hamburger
 function toggleMenu(){
   document.getElementById('ham').classList.toggle('open');
   document.getElementById('mm').classList.toggle('open');
@@ -467,8 +699,100 @@ function closeMenu(){
   document.getElementById('mm').classList.remove('open');
   document.body.style.overflow='';
 }
+
+// Reveal
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:0.07});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Shows toggle
+(function(){
+  const container = document.getElementById('shows-container');
+  const hasShows = container && container.getAttribute('data-has-shows') === 'true';
+  if(hasShows){
+    document.getElementById('shows-list').style.display = 'block';
+    document.getElementById('shows-soon').style.display = 'none';
+  } else {
+    document.getElementById('shows-list').style.display = 'none';
+    document.getElementById('shows-soon').style.display = 'block';
+  }
+})();
+
+// Forms
+function handleForm(e){
+  e.preventDefault();
+  const s=document.getElementById('fsuccess');
+  s.style.display='block';e.target.reset();
+  setTimeout(()=>{s.style.display='none';},5000);
+}
+// Email list stored in localStorage (client-side, no server needed)
+const LIST_KEY = 'ls_kingdom_list';
+const ADMIN_PW = 'TheCrown2026';
+
+function getList(){
+  try{ return JSON.parse(localStorage.getItem(LIST_KEY)||'[]'); }
+  catch(e){ return []; }
+}
+function saveList(list){
+  localStorage.setItem(LIST_KEY, JSON.stringify(list));
+}
+
+function handleJoin(e){
+  const name = document.getElementById('join-name').value.trim();
+  const email = document.getElementById('join-email').value.trim();
+  const success = document.getElementById('join-success');
+  const error = document.getElementById('join-error');
+  if(!name || !email || !email.includes('@')){
+    error.style.display='block';
+    setTimeout(()=>{ error.style.display='none'; },3000);
+    return;
+  }
+  const list = getList();
+  // prevent duplicates
+  if(!list.find(e=>e.email===email)){
+    list.push({ name, email, date: new Date().toLocaleDateString() });
+    saveList(list);
+  }
+  success.style.display='block';
+  document.getElementById('join-name').value='';
+  document.getElementById('join-email').value='';
+  setTimeout(()=>{ success.style.display='none'; },5000);
+}
+
+function viewList(){
+  const pw = document.getElementById('admin-pw').value.trim();
+  const err = document.getElementById('admin-error');
+  if(pw !== ADMIN_PW){
+    err.style.display='block';
+    setTimeout(()=>{ err.style.display='none'; },3000);
+    return;
+  }
+  const list = getList();
+  const container = document.getElementById('list-entries');
+  if(list.length===0){
+    container.innerHTML='<p style="font-size:.8rem;color:rgba(244,239,232,.35);">No signups yet.</p>';
+  } else {
+    container.innerHTML = list.map((e,i)=>`
+      <div style="display:flex;gap:1rem;align-items:center;padding:.4rem 0;border-bottom:1px solid rgba(184,147,42,.08);">
+        <span style="font-size:.7rem;color:rgba(184,147,42,.4);min-width:1.5rem;">${i+1}</span>
+        <span style="font-size:.85rem;color:var(--paper);flex:1;">${e.name}</span>
+        <span style="font-size:.75rem;color:rgba(244,239,232,.45);flex:2;">${e.email}</span>
+        <span style="font-size:.65rem;color:rgba(244,239,232,.25);">${e.date||''}</span>
+      </div>`).join('');
+  }
+  document.getElementById('list-locked').style.display='none';
+  document.getElementById('list-view').style.display='block';
+}
+
+function exportList(){
+  const list = getList();
+  if(!list.length) return;
+  const csv = 'Name,Email,Date\n' + list.map(e=>`"${e.name}","${e.email}","${e.date||''}"`).join('\n');
+  const blob = new Blob([csv],{type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download='lordsaliba-kingdom-list.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
 
 
 
