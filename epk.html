@@ -207,21 +207,23 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
 
 
 /* SWORD CURSOR — desktop only */
-@media (pointer: fine) {
-  body { cursor: none; }
-  #sword-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    width: 32px;
-    height: 32px;
-    transform: translate(-4px, -4px) rotate(-45deg);
-    transition: transform 0.1s ease, filter 0.1s ease;
-    filter: drop-shadow(0 0 6px rgba(184,147,42,.6));
-    display: none;
-  }
-  body.cursor-ready #sword-cursor { display: block; }
-  a, button, [onclick] { cursor: none; }
+#sword-cursor {
+  display: none !important;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 32px;
+  height: 32px;
+  transform: translate(-4px, -4px) rotate(-45deg);
+  transition: transform 0.1s ease, filter 0.1s ease;
+  filter: drop-shadow(0 0 6px rgba(184,147,42,.6));
+}
+@media (hover: hover) and (pointer: fine) {
+  body.cursor-ready { cursor: none; }
+  body.cursor-ready #sword-cursor { display: block !important; }
+  body.cursor-ready a,
+  body.cursor-ready button,
+  body.cursor-ready [onclick] { cursor: none; }
 }
 </style>
 </head>
@@ -472,9 +474,11 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 
 
-// Sword cursor — desktop only
+// Sword cursor — desktop only, never on touch
 (function(){
-  if(window.matchMedia('(pointer: fine)').matches){
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  var isMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(isMouse && !isTouch){
     document.body.classList.add('cursor-ready');
     const el = document.getElementById('sword-cursor');
     if(!el) return;
